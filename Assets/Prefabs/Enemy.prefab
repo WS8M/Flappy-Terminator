@@ -25,12 +25,76 @@ Transform:
   m_GameObject: {fileID: 2278954388131269481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0.00000011920926}
-  m_LocalPosition: {x: -0.746, y: -0, z: 0}
+  m_LocalPosition: {x: -0.74600005, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3787779181888213281}
+  m_Father: {fileID: 9048762557945959981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+--- !u!1 &5162914759007906753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9048762557945959981}
+  - component: {fileID: 2381665694733608271}
+  - component: {fileID: 264453827678839100}
+  m_Layer: 0
+  m_Name: Attacker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9048762557945959981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162914759007906753}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8895493000730064813}
+  m_Father: {fileID: 3787779181888213281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2381665694733608271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162914759007906753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0dad5dfb6b764b408135ea878c98967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoint: {fileID: 8895493000730064813}
+  _bulletSpeed: 1
+  _bulletSpawner: {fileID: 264453827678839100}
+--- !u!114 &264453827678839100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162914759007906753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1311c0cd21e449898fbf50f7c5035ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 7234938100108283858, guid: 13f57a26fa505427398cc04859f914af, type: 3}
+  _poolCapacity: 4
+  _poolMaxSize: 4
 --- !u!1 &7567296331557872137
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +108,6 @@ GameObject:
   - component: {fileID: 7800717912718781228}
   - component: {fileID: 3181298342049614161}
   - component: {fileID: -5311392253415365391}
-  - component: {fileID: 2127512207699115442}
   - component: {fileID: 7969953716988984672}
   m_Layer: 8
   m_Name: Enemy
@@ -66,7 +129,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8895493000730064813}
+  - {fileID: 9048762557945959981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4224451214567940424
@@ -195,26 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf68cf5940634237955ffa634bbf009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attacker: {fileID: 2127512207699115442}
+  _attacker: {fileID: 2381665694733608271}
   _collisionHandler: {fileID: 7969953716988984672}
   _attackDelay: 3
---- !u!114 &2127512207699115442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7567296331557872137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0dad5dfb6b764b408135ea878c98967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 7234938100108283858, guid: 13f57a26fa505427398cc04859f914af, type: 3}
-  _poolCapacity: 3
-  _poolMaxSize: 3
-  _spawnPoint: {fileID: 8895493000730064813}
-  _bulletSpeed: 1
+  _reward: 1
 --- !u!114 &7969953716988984672
 MonoBehaviour:
   m_ObjectHideFlags: 0

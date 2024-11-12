@@ -32,7 +32,10 @@ public class EnemySpawner : Spawner<Enemy>
     protected override void OnGet(Enemy enemy)
     {
         var spawnPosition = new Vector2(transform.position.x,  + Random.Range(_minSpawnPositionY, _maxSpawnPositionY));
+        
         enemy.transform.position = spawnPosition;
+        enemy.gameObject.SetActive(true);
+        
         enemy.Activate();
         enemy.DestroyedByPlayer += _scoreCounter.AddScore;
     }

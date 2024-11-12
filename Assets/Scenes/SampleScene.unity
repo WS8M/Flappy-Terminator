@@ -520,7 +520,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 623462466}
+  m_Father: {fileID: 515600870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &431024729
 GameObject:
@@ -777,6 +777,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463366917}
   m_CullTransparentMesh: 1
+--- !u!1 &515600869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515600870}
+  - component: {fileID: 515600872}
+  - component: {fileID: 515600871}
+  m_Layer: 0
+  m_Name: Attacker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &515600870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515600869}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 403253186}
+  m_Father: {fileID: 623462466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &515600871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515600869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1311c0cd21e449898fbf50f7c5035ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 4956890979480775529, guid: 497036e28ad034b6eaf60721acd235aa, type: 3}
+  _poolCapacity: 4
+  _poolMaxSize: 4
+--- !u!114 &515600872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515600869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0dad5dfb6b764b408135ea878c98967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnPoint: {fileID: 403253186}
+  _bulletSpeed: 10
+  _bulletSpawner: {fileID: 515600871}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +854,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -905,6 +970,20 @@ MonoBehaviour:
   _spawner: {fileID: 981828215}
   _startScreen: {fileID: 1576916605}
   _endScreen: {fileID: 1289712348}
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7440234fbced949b5aa5b6edd5889d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpButton: 32
+  _attackButton: 101
 --- !u!1 &623462462
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +999,6 @@ GameObject:
   - component: {fileID: 623462469}
   - component: {fileID: 623462468}
   - component: {fileID: 623462467}
-  - component: {fileID: 623462471}
   - component: {fileID: 623462472}
   m_Layer: 0
   m_Name: Player
@@ -1038,7 +1116,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 403253186}
+  - {fileID: 515600870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &623462467
@@ -1065,10 +1143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5e38be48abc405a8c706e1f5852e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInput: {fileID: 519420035}
   _playerMover: {fileID: 623462463}
   _collisionHandler: {fileID: 623462469}
   _scoreCounter: {fileID: 623462467}
-  _attacker: {fileID: 623462471}
+  _attacker: {fileID: 515600872}
+  _shootDelay: 0.1
 --- !u!114 &623462469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,23 +1161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56cceacc7a0324d0c8e4269733070d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &623462471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623462462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0dad5dfb6b764b408135ea878c98967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 4956890979480775529, guid: 497036e28ad034b6eaf60721acd235aa, type: 3}
-  _poolCapacity: 10
-  _poolMaxSize: 4
-  _spawnPoint: {fileID: 403253186}
-  _bulletSpeed: 10
 --- !u!70 &623462472
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

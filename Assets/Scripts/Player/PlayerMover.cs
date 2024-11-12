@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
@@ -23,16 +24,16 @@ public class PlayerMover : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.velocity = new Vector2(_speed, _tapForce);
-            transform.rotation = _maxRotation;
-        }
-                
+    {   
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, Time.deltaTime * _rotationSpeed);
     }
 
+    public void Jump()
+    {
+        _rigidbody.velocity = new Vector2(_speed, _tapForce);
+        transform.rotation = _maxRotation;
+    }
+    
     public void Reset()
     {
         transform.position = _startPosition;

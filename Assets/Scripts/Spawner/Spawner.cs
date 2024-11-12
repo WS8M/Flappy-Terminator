@@ -15,10 +15,10 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour, IPoola
     private void Awake()
     {
         _pool = new ObjectPool<IPoolable>(
-            createFunc: CreateFunction,
-            actionOnGet: ActionOnGet,
-            actionOnRelease: ActionOnRelease,
-            actionOnDestroy: ActionOnDestroy,
+            createFunc: Create,
+            actionOnGet: Get,
+            actionOnRelease: Release,
+            actionOnDestroy: Destroy,
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
@@ -48,15 +48,15 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour, IPoola
         SpawnedObjects.Remove(obj as T);
     }
     
-    private T CreateFunction() => 
+    private T Create() => 
         OnCreate();
 
-    private void ActionOnGet(IPoolable obj) => 
+    private void Get(IPoolable obj) => 
         OnGet(obj as T);
 
-    private void ActionOnRelease(IPoolable obj) => 
+    private void Release(IPoolable obj) => 
         OnRelease(obj as T);
 
-    private void ActionOnDestroy(IPoolable obj) => 
+    private void Destroy(IPoolable obj) => 
         Destroy((obj as T).gameObject);
 }

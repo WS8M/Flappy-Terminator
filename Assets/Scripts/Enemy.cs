@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IInteractable, IPoolable
@@ -8,8 +9,7 @@ public class Enemy : MonoBehaviour, IInteractable, IPoolable
     [SerializeField] private float _attackDelay;
     [SerializeField] private float _reward = 1f;
 
-    private float _currentTime;
-    private bool _isActive;
+    private Coroutine _currentCoroutine;
     
     public event Action<IPoolable> Removed;
     public event Action<float> DestroyedByPlayer;
@@ -20,36 +20,47 @@ public class Enemy : MonoBehaviour, IInteractable, IPoolable
     private void OnDisable() => 
         _collisionHandler.CollisionDetected -= OnCollisionWithInteract;
 
-    private void Update()
-    {
-        if (_isActive == false)
-            return;
-        
-        if (_currentTime > 0)
-        {   
-            _currentTime -= Time.deltaTime;
-        }
-        else
-        {
-            _attacker.Attack();
-            _currentTime = _attackDelay;
-        }
-    }
-
     public void Activate()
     {
-        _currentTime = _attackDelay;
-        _isActive = true;
+        if (_currentCoroutine == null)
+        {
+            _currentCoroutine = StartCoroutine(Attack());
+            return;            
+        }
+        
+        StopCoroutine(_currentCoroutine);
+        _currentCoroutine = StartCoroutine(Attack());
     }
     
     public void Deactivate()
     {
-        _isActive = false;
+        StopCoroutine(_currentCoroutine);
         Removed?.Invoke(this);
     }
     
     public void Reset() => 
         _attacker.Reset();
+    
+    private IEnumerator Attack()
+    {
+        var wait = new WaitForEndOfFrame();
+        float currentTime = _attackDelay;
+        
+        while (enabled)
+        {
+            if (currentTime > 0)
+            {
+                currentTime -= Time.deltaTime;
+            }
+            else
+            {
+                _attacker.Attack();
+                currentTime = _attackDelay;
+            }
+            
+            yield return wait;
+        }
+    }
 
     private void OnCollisionWithInteract(IInteractable interactable)
     {
